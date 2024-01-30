@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cowprotocol/widget-react": "^0.3.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
     "@safe-global/cra-template-safe-app": "5.0.0",
+    "@safe-global/safe-apps-provider": "^0.18.2",
     "@safe-global/safe-apps-react-sdk": "^4.7.1",
     "@safe-global/safe-react-components": "^2.0.6",
+    "ethers": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
