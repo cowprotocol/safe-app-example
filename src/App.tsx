@@ -1,32 +1,12 @@
 import React, { useCallback, useMemo } from 'react'
-import { Container, Button, Grid, Link, Typography } from '@mui/material'
+import { Container, Button, Grid, Link, Typography, Paper } from '@mui/material'
 import { useSafeAppsSDK } from '@safe-global/safe-apps-react-sdk'
 import { CowSwapWidget } from './CowSwapWidget'
-import { ethers } from 'ethers'
-import { SafeAppProvider } from '@safe-global/safe-apps-provider'
-import { EthereumProvider, JsonRpcRequest } from '@cowprotocol/widget-react'
-import SafeAppsSDK, { SafeInfo } from '@safe-global/safe-apps-sdk'
-
-class SafeProvider implements EthereumProvider {
-  safeAppProvider: SafeAppProvider
-
-  constructor(safe: SafeInfo, sdk: SafeAppsSDK) {
-    this.safeAppProvider = new SafeAppProvider(safe, sdk)
-  }
-
-  on(event: string, args: unknown): void {
-    this.on(event, args)
-  }
-  request<T>(params: JsonRpcRequest): Promise<T> {
-    return this.request(params)
-  }
-  enable(): Promise<void> {
-    return this.safeAppProvider.connect()
-  }
-}
+import { SafeProvider, SafeProvider2 } from './SafeProvider'
 
 const SafeApp = (): React.ReactElement => {
   const { sdk, safe } = useSafeAppsSDK()
+  // const web3Provider = useMemo(() => new SafeProvider2(safe, sdk), [sdk, safe])
   const web3Provider = useMemo(() => new SafeProvider(safe, sdk), [sdk, safe])
 
   if (safe && sdk) {
@@ -53,20 +33,32 @@ const SafeApp = (): React.ReactElement => {
   }, [safe, sdk])
 
   return (
-    <Container>
-      <Grid container direction="column" rowSpacing={2} alignItems="center">
-        <Grid item>
-          <Typography variant="h3">Safe: {safe.safeAddress}</Typography>
+    <Paper elevation={0}>
+      <Container>
+        <Grid container direction="column" rowSpacing={2} alignItems="center">
+          <Grid item>
+            <Typography variant="h3">Safe: {safe.safeAddress}</Typography>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" onClick={submitTx}>
+              Send Transaction
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button variant="contained" color="primary" onClick={submitTx}>
-            Send Transaction
-          </Button>
+      </Container>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ minHeight: '100vh' }}
+      >
+        <Grid item xs={3}>
+          <CowSwapWidget provider={web3Provider} />
         </Grid>
       </Grid>
-
-      <CowSwapWidget provider={web3Provider} />
-    </Container>
+    </Paper>
   )
 }
 

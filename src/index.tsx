@@ -14,7 +14,7 @@ if (!rootElement) throw new Error('Root element not found on public/index.html')
 const root = ReactDOM.createRoot(rootElement)
 root.render(
   <React.StrictMode>
-    <SafeThemeProvider mode="light">
+    <SafeThemeProvider mode="dark">
       {(safeTheme: Theme) => (
         <ThemeProvider theme={safeTheme}>
           <SafeProvider
