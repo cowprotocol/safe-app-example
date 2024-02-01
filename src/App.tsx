@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { Container, Button, Grid, Link, Typography, Paper } from '@mui/material'
+import { Container, Button, Grid, Link, Typography, Paper, Box } from '@mui/material'
 import { useSafeAppsSDK } from '@safe-global/safe-apps-react-sdk'
 import { CowSwapWidget } from './CowSwapWidget'
 import { SafeProvider, SafeProvider2 } from './SafeProvider'
@@ -34,6 +34,7 @@ const SafeApp = (): React.ReactElement => {
 
   return (
     <Paper elevation={0}>
+      {/*
       <Container>
         <Grid container direction="column" rowSpacing={2} alignItems="center">
           <Grid item>
@@ -46,18 +47,10 @@ const SafeApp = (): React.ReactElement => {
           </Grid>
         </Grid>
       </Container>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ minHeight: '100vh' }}
-      >
-        <Grid item xs={3}>
-          <CowSwapWidget provider={web3Provider} />
-        </Grid>
-      </Grid>
+      */}
+      <Box sx={{ height: '100%' }}>
+        <CowSwapWidget provider={web3Provider} />
+      </Box>
     </Paper>
   )
 }
