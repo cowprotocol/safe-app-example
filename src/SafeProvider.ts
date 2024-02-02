@@ -21,34 +21,27 @@ export class SafeProvider implements EthereumProvider {
   safeAppProvider: SafeAppProvider
 
   constructor(safe: SafeInfo, sdk: SafeAppsSDK) {
+    // console.log('[COW] constructor', safe, sdk)
     this.safeAppProvider = new SafeAppProvider(safe, sdk)
   }
 
   on(event: string, args: unknown): void {
+    // console.log('[COW] on', event, args)
     this.safeAppProvider.on(event, transformToCallback(args) ?? (() => {}))
   }
-  request<T>(params: JsonRpcRequest): Promise<T> {
+
+  async request<T>(params: JsonRpcRequest): Promise<T> {
+    if (params.method === 'eth_sendTransaction') {
+      console.log('[COW-App] eth_sendTransaction', params)
+      const result = await this.safeAppProvider.request(params)
+      console.log('[COW-App] eth_sendTransaction result', result)
+      return result
+    }
+
     return this.safeAppProvider.request(params)
   }
-  enable(): Promise<void> {
+  async enable(): Promise<void> {
+    console.log('[COW-App] enable')
     return this.safeAppProvider.connect()
-  }
-}
-
-export class SafeProvider2 implements EthereumProvider {
-  web3Provider: Web3Provider
-
-  constructor(safe: SafeInfo, sdk: SafeAppsSDK) {
-    this.web3Provider = new ethers.providers.Web3Provider(new SafeAppProvider(safe, sdk))
-  }
-
-  on(event: string, args: unknown): void {
-    this.web3Provider.on(event, transformToCallback(args) ?? (() => {}))
-  }
-  request<T>(params: JsonRpcRequest): Promise<T> {
-    return this.web3Provider.send(params.method, params.params)
-  }
-  enable(): Promise<void> {
-    return this.web3Provider.send('eth_requestAccounts', [])
   }
 }
