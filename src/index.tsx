@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import { SafeThemeProvider } from '@safe-global/safe-react-components'
 import SafeProvider from '@safe-global/safe-apps-react-sdk'
 
-import App from './App'
+import App from './components/App'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('Root element not found on public/index.html')

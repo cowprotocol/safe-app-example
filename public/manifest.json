@@ -1,6 +1,6 @@
 {
-  "short_name": "CoW Safe App",
-  "name": "CoW Safe App",
+  "short_name": "CoW Widget - Safe App",
+  "name": "CoW Widget - Safe App",
   "description": "PoC of a Safe App using CoW widget",
   "icons": [
     {
