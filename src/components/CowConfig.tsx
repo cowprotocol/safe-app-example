@@ -1,28 +1,22 @@
-import styled from '@emotion/styled'
 import {
   Autocomplete,
-  Button,
   Checkbox,
   FormControl,
   FormControlLabel,
-  FormGroup,
   InputLabel,
   MenuItem,
   Paper,
   Select,
   SelectChangeEvent,
-  Stack,
   TextField,
 } from '@mui/material'
-import { SyntheticEvent, useEffect, useState } from 'react'
-import { CowParams } from './CowWidget'
-import { TradeType } from '@cowprotocol/widget-react'
+import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
 
 const TOKENS = ['USDC', 'COW', 'WETH', 'DAI']
 
 export interface CowConfigProps {
-  params: CowParams
-  updateParams: (config: CowParams) => void
+  params: CowSwapWidgetParams
+  updateParams: (config: CowSwapWidgetParams) => void
 }
 
 export function CowConfig(props: CowConfigProps) {
@@ -49,9 +43,12 @@ export function CowConfig(props: CowConfigProps) {
       // case 'buyAmount':
       //   newParams.buy = { asset: params.buy?.asset || 'COW', amount: value }
       //   break
-      case 'interfaceFeeBips':
-        console.log('interfaceFeeBips', interfaceFeeBips)
-        newParams.interfaceFeeBips = value
+      case 'partnerFee':
+        console.log('partnerFee', partnerFee)
+        // newParams.partnerFee = {
+        //   bps: Number(value),
+        //   recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
+        // }
         break
       default:
         console.warn('Unhandled input name', name)
@@ -108,7 +105,7 @@ export function CowConfig(props: CowConfigProps) {
     updateParams(newParams)
   }
 
-  const { sell, buy, interfaceFeeBips, enabledTradeTypes, chainId, tradeType } = params
+  const { sell, buy, partnerFee, enabledTradeTypes, chainId, tradeType } = params
   const [sellToken, sellAmount] = sell ? [sell.asset, sell.amount] : [undefined, undefined]
   const [buyToken, _buyAmount] = buy ? [buy.asset, buy.amount] : [undefined, undefined]
 
@@ -153,9 +150,9 @@ export function CowConfig(props: CowConfigProps) {
       <TextField label="Sell amount" name="sellAmount" value={sellAmount} onChange={handleChange} />
       {/* <TextField label="Buy amount" name="buyAmount" value={buyAmount} onChange={handleChange} /> */}
       <TextField
-        label="Interface Fee (Bips)"
-        name="interfaceFeeBips"
-        value={interfaceFeeBips}
+        label="Partner Fee (Bips)"
+        name="partnerFee"
+        value={partnerFee}
         onChange={handleChange}
         type="number"
       />

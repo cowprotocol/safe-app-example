@@ -1,29 +1,56 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { Paper } from '@mui/material'
 import { useSafeAppsSDK } from '@safe-global/safe-apps-react-sdk'
-import { CowParams, CowWidget } from './CowWidget'
+import { CowWidget } from './CowWidget'
 import { SafeProvider } from '../SafeProvider'
 import { CowConfig } from './CowConfig'
-import { TradeType } from '@cowprotocol/widget-react'
+import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
+
+const APP_CODE = 'CoW Widget - Safe App'
+
+const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
+  appCode: APP_CODE,
+  width: '100%',
+  height: '640px',
+  // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
+  // env: 'dev',
+  env: 'local',
+
+  disableToastMessages: true,
+  disablePostedOrderConfirmationModal: true,
+  hideConnectButton: true,
+  hideLogo: true,
+  hideNetworkSelector: true,
+  partnerFee: {
+    bps: 50,
+    recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
+  },
+  images: {
+    emptyOrders: 'https://swap.cow.fi/assets/meditating-cow-v2-AePIJBpI.svg',
+  },
+  sounds: {
+    orderError: null,
+    orderExecuted: null,
+    postOrder: null,
+  },
+  chainId: 1,
+  sell: {
+    asset: 'USDC',
+    amount: '100000',
+  },
+  buy: {
+    asset: 'COW',
+    amount: '0',
+  },
+  enabledTradeTypes: [TradeType.SWAP, TradeType.LIMIT, TradeType.ADVANCED],
+  tradeType: TradeType.SWAP,
+}
 
 const SafeApp = (): React.ReactElement => {
   const { sdk, safe } = useSafeAppsSDK()
   const web3Provider = useMemo(() => new SafeProvider(safe, sdk), [sdk, safe])
-  const [params, setParams] = useState<CowParams>({
-    chainId: 1,
-    sell: {
-      asset: 'USDC',
-      amount: '100000',
-    },
-    buy: {
-      asset: 'COW',
-      amount: '0',
-    },
-    interfaceFeeBips: '50',
-    enabledTradeTypes: [TradeType.SWAP, TradeType.LIMIT, TradeType.ADVANCED],
-    tradeType: TradeType.SWAP,
-  })
-  const updateWidgetParams = useCallback((params: CowParams) => {
+  const [params, setParams] = useState<CowSwapWidgetParams>(DEFAULT_COW_PARAMS)
+  const updateWidgetParams = useCallback((params: CowSwapWidgetParams) => {
     setParams(params)
   }, [])
 

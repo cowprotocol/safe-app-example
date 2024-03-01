@@ -1163,17 +1163,17 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cowprotocol/widget-lib@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.3.0.tgz#fb2b396ab18e502a2816ccb6d9959c181e541c1c"
-  integrity sha512-yE7d0DpcLpc/PivhYrIPTq/tE/84vft+BnTPPtDhZWZ4iRR1/VVlzoHVBL3xnqvHE0nevoSx2qig6lcqdUmJFA==
+"@cowprotocol/widget-lib@^0.6.0-RC.1":
+  version "0.6.0-RC.1"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.6.0-RC.1.tgz#4e1fe2bc01253efb78ecc709ddc13b49fab02df5"
+  integrity sha512-FqMK3eR7ibzc453JhUJvXGyNVLGVQvQYZPYZVHgyVaN6ifURIoZ25APQErgSpAoNysgEadVzK3F+UBtNEpo7jQ==
 
-"@cowprotocol/widget-react@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.3.0.tgz#dea4159384e4303fa2b8deb31a27d4e3b93368be"
-  integrity sha512-+465oFfQ1yFgkrGoedmDXNNyq2jCFCg0VLzzkD2wnWk8sVLaN2ucti4sRB0JlDAcQxkAO9EgNwHeF/GEsi9UEw==
+"@cowprotocol/widget-react@^0.5.0-RC.1":
+  version "0.5.0-RC.1"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.5.0-RC.1.tgz#4ca2de07f909330b9de6e514d9250acae87b6d1d"
+  integrity sha512-TYiefvWRp/VQMk2SFePG3HXPPXoOvgltmiYvfEzQZNMx+NVh04RIbkba+okn5sg3521z9PY6r5LS/KEeZ3Y6Aw==
   dependencies:
-    "@cowprotocol/widget-lib" "^0.3.0"
+    "@cowprotocol/widget-lib" "^0.6.0-RC.1"
 
 "@csstools/normalize.css@*":
   version "12.1.1"

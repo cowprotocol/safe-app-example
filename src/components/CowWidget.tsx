@@ -1,45 +1,43 @@
-import { CowSwapWidgetParams, TradeType, EthereumProvider, CowSwapWidget } from '@cowprotocol/widget-react'
+// import { CowEventListeners, CowEvents, ToastMessageType } from '@cowprotocol/events'
+import { CowSwapWidgetParams, TradeType, CowSwapWidget, CowSwapWidgetProps, CowEvents } from '@cowprotocol/widget-react'
 
-import { useMemo } from 'react'
-import { Box } from '@mui/material'
+import { useMemo, useState } from 'react'
+import { Box, Button, Snackbar } from '@mui/material'
 
-const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
-  appCode: 'CoW Widget - Safe App',
-  width: '100%',
-  height: '640px',
-  // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
-  env: 'dev',
-  // env: 'local',
-  enabledTradeTypes: [TradeType.LIMIT, TradeType.SWAP, TradeType.ADVANCED],
-  tradeType: TradeType.SWAP,
-}
-
-export interface CowWidgetProps {
-  provider: EthereumProvider
-  params: CowParams
-}
-
-export type CowParams = Pick<
-  CowSwapWidgetParams,
-  'interfaceFeeBips' | 'sell' | 'buy' | 'chainId' | 'enabledTradeTypes' | 'tradeType'
->
-
-export function CowWidget(props: CowWidgetProps) {
+export function CowWidget(props: CowSwapWidgetProps) {
   const { provider, params } = props
 
-  const cowParams = useMemo(() => {
-    const newParams = {
-      ...DEFAULT_COW_PARAMS,
-      ...params,
-      provider,
+  const [toasts, setToasts] = useState<String[]>([])
+  const toast = toasts.length > 0 ? toasts[0] : undefined
+
+  const openToast = (message: string) => {
+    setToasts((t) => [...t, message])
+  }
+
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return
     }
-    console.log('cowParams changed', newParams)
-    return newParams
-  }, [provider, params])
+
+    setToasts((t) => t.slice(1))
+  }
+
+  const listeners = useMemo(() => {
+    return [
+      {
+        event: CowEvents.ON_TOAST_MESSAGE,
+        handler: (event) => {
+          console.info('🍞 Message:', event)
+          openToast(event.message)
+        },
+      },
+    ]
+  }, [openToast])
 
   return (
-    <Box sx={{ height: '100%' }}>
-      <CowSwapWidget params={cowParams} />
+    <Box>
+      <Snackbar open={toasts.length > 0} autoHideDuration={6000} onClose={handleClose} message={toast} />
+      <CowSwapWidget params={params} provider={provider} listeners={listeners} />
     </Box>
   )
 }
