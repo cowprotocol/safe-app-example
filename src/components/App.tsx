@@ -12,13 +12,15 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   appCode: APP_CODE,
   width: '100%',
   height: '640px',
+  standaloneMode: false, // Dapp mode, we handle the Ethereum provider
+  // baseUrl: { environment: 'dev' },
+  // baseUrl: { environment: 'local' },
+  baseUrl: 'https://swap-dev-git-fee-labels-cowswap.vercel.app',
+
   // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
-  // env: 'dev',
-  env: 'local',
 
   disableToastMessages: true,
   disablePostedOrderConfirmationModal: true,
-  hideConnectButton: true,
   hideLogo: true,
   hideNetworkSelector: true,
   partnerFee: {

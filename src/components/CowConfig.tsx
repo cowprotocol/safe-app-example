@@ -44,11 +44,10 @@ export function CowConfig(props: CowConfigProps) {
       //   newParams.buy = { asset: params.buy?.asset || 'COW', amount: value }
       //   break
       case 'partnerFee':
-        console.log('partnerFee', partnerFee)
-        // newParams.partnerFee = {
-        //   bps: Number(value),
-        //   recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
-        // }
+        newParams.partnerFee = {
+          bps: Number(value),
+          recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
+        }
         break
       default:
         console.warn('Unhandled input name', name)
@@ -60,7 +59,6 @@ export function CowConfig(props: CowConfigProps) {
 
   const handleChainChange = (event: SelectChangeEvent) => {
     const chainId = Number(event.target.value)
-    console.log('chain change', chainId)
     updateParams({ ...params, chainId })
   }
 
@@ -71,8 +69,6 @@ export function CowConfig(props: CowConfigProps) {
     if (!newParams.enabledTradeTypes.includes(newParams.tradeType)) {
       newParams.enabledTradeTypes.push(newParams.tradeType)
     }
-    console.log('[anx] oldParams', params)
-    console.log('[anx] newParams', newParams)
     updateParams(newParams)
   }
 
@@ -108,6 +104,7 @@ export function CowConfig(props: CowConfigProps) {
   const { sell, buy, partnerFee, enabledTradeTypes, chainId, tradeType } = params
   const [sellToken, sellAmount] = sell ? [sell.asset, sell.amount] : [undefined, undefined]
   const [buyToken, _buyAmount] = buy ? [buy.asset, buy.amount] : [undefined, undefined]
+  const { bps, recipient } = partnerFee || {}
 
   return (
     <Paper>
@@ -149,13 +146,7 @@ export function CowConfig(props: CowConfigProps) {
       />
       <TextField label="Sell amount" name="sellAmount" value={sellAmount} onChange={handleChange} />
       {/* <TextField label="Buy amount" name="buyAmount" value={buyAmount} onChange={handleChange} /> */}
-      <TextField
-        label="Partner Fee (Bips)"
-        name="partnerFee"
-        value={partnerFee}
-        onChange={handleChange}
-        type="number"
-      />
+      <TextField label="Partner Fee (Bips)" name="partnerFee" value={bps} onChange={handleChange} type="number" />
       <FormControl sx={{ width: '100px' }}>
         <InputLabel id="demo-simple-select-label">Default trade type</InputLabel>
         <Select

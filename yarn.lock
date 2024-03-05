@@ -1163,17 +1163,24 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cowprotocol/widget-lib@^0.6.0-RC.1":
-  version "0.6.0-RC.1"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.6.0-RC.1.tgz#4e1fe2bc01253efb78ecc709ddc13b49fab02df5"
-  integrity sha512-FqMK3eR7ibzc453JhUJvXGyNVLGVQvQYZPYZVHgyVaN6ifURIoZ25APQErgSpAoNysgEadVzK3F+UBtNEpo7jQ==
+"@cowprotocol/events@^0.1.0-RC.1":
+  version "0.1.0-RC.1"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/events/-/events-0.1.0-RC.1.tgz#805e7764ac1ff233e3c74fb7e726c56abeb81605"
+  integrity sha512-HVs1YzKFzeKkDI+WJwunyS5PKI8csK97ccyDxy3wAEjjFz55IbaFz1Zf7O4iFaL08OLnDSkO3wtwp+chnZ2BQw==
 
-"@cowprotocol/widget-react@^0.5.0-RC.1":
-  version "0.5.0-RC.1"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.5.0-RC.1.tgz#4ca2de07f909330b9de6e514d9250acae87b6d1d"
-  integrity sha512-TYiefvWRp/VQMk2SFePG3HXPPXoOvgltmiYvfEzQZNMx+NVh04RIbkba+okn5sg3521z9PY6r5LS/KEeZ3Y6Aw==
+"@cowprotocol/widget-lib@^0.6.0-RC.4":
+  version "0.6.0-RC.4"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.6.0-RC.4.tgz#07f669c7c16225d1de94b4423e8ee680103252f6"
+  integrity sha512-8Q36wpY88p0n0ipZmiSZwrcsml4mXUcM37pQEdkHMfrCngy9sN6fxRPOm2ho3e8S7IWEcxWjkY1utVlYeDDMCQ==
   dependencies:
-    "@cowprotocol/widget-lib" "^0.6.0-RC.1"
+    "@cowprotocol/events" "^0.1.0-RC.1"
+
+"@cowprotocol/widget-react@^0.5.0-RC.4":
+  version "0.5.0-RC.4"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.5.0-RC.4.tgz#d6b568a49d95e7b2ab818ba48cf1509b570b25d9"
+  integrity sha512-MjvwqQ6iXdYE5qheQlxW8yUhLRg5bSoTd9KdZCqRxD+aP4yS49Kek0eT7WmdPQDuEYuluqmaEsoLkZSvTI7Zng==
+  dependencies:
+    "@cowprotocol/widget-lib" "^0.6.0-RC.4"
 
 "@csstools/normalize.css@*":
   version "12.1.1"

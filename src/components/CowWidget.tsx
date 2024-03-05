@@ -1,5 +1,6 @@
 // import { CowEventListeners, CowEvents, ToastMessageType } from '@cowprotocol/events'
-import { CowSwapWidgetParams, TradeType, CowSwapWidget, CowSwapWidgetProps, CowEvents } from '@cowprotocol/widget-react'
+import { CowSwapWidgetParams, TradeType, CowSwapWidget, CowSwapWidgetProps } from '@cowprotocol/widget-react'
+import { CowEvents, CowEventListeners } from '@cowprotocol/events'
 
 import { useMemo, useState } from 'react'
 import { Box, Button, Snackbar } from '@mui/material'
@@ -22,18 +23,19 @@ export function CowWidget(props: CowSwapWidgetProps) {
     setToasts((t) => t.slice(1))
   }
 
-  const listeners = useMemo(() => {
+  const listeners = useMemo<CowEventListeners>(() => {
     return [
       {
         event: CowEvents.ON_TOAST_MESSAGE,
         handler: (event) => {
-          console.info('🍞 Message:', event)
+          console.info('🍞 New toast message:', event)
           openToast(event.message)
         },
       },
     ]
   }, [openToast])
 
+  console.log('CowWidget', params.partnerFee)
   return (
     <Box>
       <Snackbar open={toasts.length > 0} autoHideDuration={6000} onClose={handleClose} message={toast} />
