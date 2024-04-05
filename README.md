@@ -1,4 +1,12 @@
-# My Safe App
+# 🐷 Your Safe App
+
+This repository contains some boilerplate code to get you started with building a Safe App with built-in swap support.
+
+Read the documentation on CoW Powered Safe Dapps in <https://docs.cow.fi/cow-protocol/tutorials/safe-app>
+
+The example app embeds the CoW Swap widget in a Safe App, and allows to change some of the configuration, such as the partner fee, token lists, or theming.
+
+It also show how to handle events happening inside CoW Swap, like the notification on a new trade.
 
 ## Getting Started
 
@@ -10,41 +18,9 @@ cp .env.sample .env
 yarn start
 ```
 
-Then:
+## Related
 
-- If HTTPS is used (by default enabled)
-  - Open your Safe app locally (by default via https://localhost:3000/) and accept the SSL error.
-- Go to the [Safe web interface](https://app.safe.global)
-- Create your test safe
-- Go to Apps -> Manage Apps -> Add Custom App
-- Paste your localhost URL, default is https://localhost:3000/
-- You should see Safe App Starter as a new app
-- Develop your app from there
-
-## Features
-
-Safe App Starter combines recommendations described in the following repositories:
-
-- [Safe Apps SDK](https://github.com/safe-global/safe-apps-sdk)
-- [safe-react-components](https://github.com/safe-global/safe-react-components)
-
-You can use the `useSafe` React hook to interact with the Safe Apps SDK
-
-```
-const safe = useSafe();
-console.log(safe.info);
-```
-
-Safe React Components are also integrated and ready to use. [See all components](https://components.safe.global/).
-
-## Dependencies
-
-### Included
-- [`@safe-global/safe-react-components`](https://github.com/safe-global/safe-react-components) (Safe{Wallet} theming for @mui/material@v5 and useful UI components)
-- [`@safe-global/safe-apps-react-sdk`](https://github.com/safe-global/safe-apps-sdk/tree/main/packages/safe-apps-react-sdk) (React hook for the Safe Apps SDK)
-
-### Recommended
-- [`ethers`](https://github.com/ethers-io/ethers.js) (Library for interacting with Ethereum)
-- [`web3`](https://github.com/ethereum/web3.js/) (Library for interacting with Ethereum)
-- [`viem`](https://github.com/wagmi-dev/viem) (Typerscript library for interacting with Ethereum)
-- [`@studydefi/money-legos`](https://github.com/studydefi/money-legos) (Library for DeFi interactions)
+- [Tutorial for CoW powered Safe Dapps](https://docs.cow.fi/cow-protocol/tutorials/safe-app)
+- [Widget Landing](https://cow.fi/widget)
+- [Widget Configurator](https://widget.cow.fi/)
+- [Widget Docs](https://docs.cow.fi/cow-protocol/tutorials/widget)
