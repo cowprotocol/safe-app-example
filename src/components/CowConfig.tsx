@@ -12,7 +12,6 @@ import {
   Grid,
 } from '@mui/material'
 import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
-import styled from '@emotion/styled'
 
 const TOKENS = ['USDC', 'COW', 'WETH', 'DAI']
 
@@ -111,7 +110,7 @@ export function CowConfig(props: CowConfigProps) {
   return (
     <Paper>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4} lg={2}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Chain</InputLabel>
             <Select
