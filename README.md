@@ -8,6 +8,10 @@ The example app embeds the CoW Swap widget in a Safe App, and allows to change s
 
 It also show how to handle events happening inside CoW Swap, like the notification on a new trade.
 
+![Swap](./docs/swap.png)
+
+![Limit Orders](./docs/limit-orders.png)
+
 ## Getting Started
 
 Install dependencies and start a local dev server.
