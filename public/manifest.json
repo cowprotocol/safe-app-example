@@ -1,10 +1,10 @@
 {
-  "short_name": "CoW Widget - Safe App",
-  "name": "CoW Widget - Safe App",
-  "description": "PoC of a Safe App using CoW widget",
+  "short_name": "Your Safe App",
+  "name": "Your CoW Powered Safe App",
+  "description": "Boost your Dapp with Swaps and Limit Orders powered by CoW Protocol",
   "icons": [
     {
-      "src": "logo.svg",
+      "src": "images/pig.png",
       "sizes": "any",
       "type": "image/svg+xml"
     },
