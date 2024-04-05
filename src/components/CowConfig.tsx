@@ -9,8 +9,10 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  Grid,
 } from '@mui/material'
 import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
+import styled from '@emotion/styled'
 
 const TOKENS = ['USDC', 'COW', 'WETH', 'DAI']
 
@@ -108,74 +110,129 @@ export function CowConfig(props: CowConfigProps) {
 
   return (
     <Paper>
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">Chain</InputLabel>
-        <Select labelId="select-chain" id="select-chain" value={chainId} label="Chain Id" onChange={handleChainChange}>
-          <MenuItem value={1}>Mainnet</MenuItem>
-          <MenuItem value={100}>Gnosis Chain</MenuItem>
-          <MenuItem value={11155111}>Sepolia</MenuItem>
-        </Select>
-      </FormControl>
-      {/* <TextField label="Sell token" name="sellToken" value={sellToken} onChange={handleChange} /> */}
-      <Autocomplete
-        disablePortal
-        options={TOKENS}
-        value={sellToken}
-        sx={{ width: 200, margin: '10px 0' }}
-        onChange={(event: any, newValue: string | null) => {
-          updateParams({
-            ...params,
-            sell: { asset: newValue || 'USDC', amount: params.sell?.amount || '100000' },
-          })
-        }}
-        renderInput={(params) => <TextField {...params} label="Sell token" />}
-      />
-      {/* <TextField label="Buy token" name="buyToken" value={buyToken} onChange={handleChange} /> */}
-      <Autocomplete
-        disablePortal
-        options={TOKENS}
-        value={buyToken}
-        sx={{ width: 200, margin: '10px 0' }}
-        onChange={(event: any, newValue: string | null) => {
-          updateParams({
-            ...params,
-            buy: { asset: newValue || 'COW' },
-          })
-        }}
-        renderInput={(params) => <TextField {...params} label="Buy token" />}
-      />
-      <TextField label="Sell amount" name="sellAmount" value={sellAmount} onChange={handleChange} />
-      {/* <TextField label="Buy amount" name="buyAmount" value={buyAmount} onChange={handleChange} /> */}
-      <TextField label="Partner Fee (Bips)" name="partnerFee" value={bps} onChange={handleChange} type="number" />
-      <FormControl sx={{ width: '100px' }}>
-        <InputLabel id="demo-simple-select-label">Default trade type</InputLabel>
-        <Select
-          labelId="select-chain"
-          id="select-chain"
-          value={tradeType}
-          label="Chain Id"
-          onChange={handleTradeTypeChange}
-        >
-          <MenuItem value={TradeType.SWAP}>Swap</MenuItem>
-          <MenuItem value={TradeType.LIMIT}>Limit</MenuItem>
-          <MenuItem value={TradeType.ADVANCED}>Twap</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControlLabel
-        control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.SWAP)} />}
-        label="Enable Swaps"
-        name="enableSwaps"
-      />
-      <FormControlLabel
-        control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.LIMIT)} />}
-        label="Enable Limit"
-        name="enableLimit"
-      />
-      <FormControlLabel
-        control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.ADVANCED)} />}
-        label="Enable TWAP"
-        name="enableTwap"
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Chain</InputLabel>
+            <Select
+              labelId="select-chain"
+              id="select-chain"
+              value={chainId}
+              label="Chain Id"
+              onChange={handleChainChange}
+            >
+              <MenuItem value={1}>Mainnet</MenuItem>
+              <MenuItem value={100}>Gnosis Chain</MenuItem>
+              <MenuItem value={11155111}>Sepolia</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        {/* Sell + Buy + Amount */}
+        <Grid item xs={12} md={6}>
+          <Grid container spacing={2}>
+            {/* Sell */}
+            <Grid item xs={4}>
+              {/* <TextField label="Sell token" name="sellToken" value={sellToken} onChange={handleChange} /> */}
+              <Autocomplete
+                fullWidth
+                disablePortal
+                options={TOKENS}
+                value={sellToken}
+                onChange={(event: any, newValue: string | null) => {
+                  updateParams({
+                    ...params,
+                    sell: { asset: newValue || 'USDC', amount: params.sell?.amount || '100000' },
+                  })
+                }}
+                renderInput={(params) => <TextField {...params} label="Sell token" />}
+              />
+            </Grid>
+
+            {/* Buy */}
+            <Grid item xs={4}>
+              {/* <TextField label="Buy token" name="buyToken" value={buyToken} onChange={handleChange} /> */}
+              <Autocomplete
+                disablePortal
+                options={TOKENS}
+                value={buyToken}
+                onChange={(event: any, newValue: string | null) => {
+                  updateParams({
+                    ...params,
+                    buy: { asset: newValue || 'COW' },
+                  })
+                }}
+                renderInput={(params) => <TextField {...params} label="Buy token" />}
+              />
+            </Grid>
+
+            {/* Amount */}
+            <Grid item xs={4}>
+              <TextField label="Sell amount" name="sellAmount" value={sellAmount} onChange={handleChange} fullWidth />
+              {/* <TextField label="Buy amount" name="buyAmount" value={buyAmount} onChange={handleChange} /> */}
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Partner Fee + Trade Types  */}
+        <Grid item xs={12} md={2}>
+          {/* Partner Fee */}
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="Partner Fee (Bips)"
+                name="partnerFee"
+                fullWidth
+                value={bps}
+                onChange={handleChange}
+                type="number"
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Default trade type  */}
+        <Grid item xs={12} md={10}>
+          <Grid container spacing={2}>
+            {/* Trade Types */}
+            <Grid item xs={3} md={3} lg={2}>
+              <FormControl fullWidth>
+                <InputLabel id="trade-type">Trade type</InputLabel>
+                <Select
+                  labelId="select-trade=type"
+                  id="select-trade-type"
+                  value={tradeType}
+                  label="Chain Id"
+                  onChange={handleTradeTypeChange}
+                >
+                  <MenuItem value={TradeType.SWAP}>Swap</MenuItem>
+                  <MenuItem value={TradeType.LIMIT}>Limit</MenuItem>
+                  <MenuItem value={TradeType.ADVANCED}>Twap</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={9} md={9} lg={10}>
+              <FormControlLabel
+                control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.SWAP)} />}
+                label="Enable Swaps"
+                name="enableSwaps"
+              />
+              <FormControlLabel
+                control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.LIMIT)} />}
+                label="Enable Limit"
+                name="enableLimit"
+              />
+
+              <FormControlLabel
+                control={<Checkbox onChange={handleCheck} checked={enabledTradeTypes?.includes(TradeType.ADVANCED)} />}
+                label="Enable TWAP"
+                name="enableTwap"
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Paper>
   )
 }

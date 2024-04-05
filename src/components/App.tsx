@@ -11,6 +11,7 @@ const APP_CODE = 'CoW Widget - Safe App'
 
 const BASE_URL = window.location.origin
 
+// Check the widget configuration settings at https://docs.cow.fi/cow-protocol/tutorials/widget
 const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   appCode: APP_CODE,
   width: '100%',
@@ -20,14 +21,18 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
 
   // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
 
+  // You can disable the toast messages and confirmation modal (if you want to handle them yourself, see event handling in https://docs.cow.fi/cow-protocol/tutorials/widget#events-handling)
   disableToastMessages: true,
   disablePostedOrderConfirmationModal: true,
-  hideLogo: true,
   hideNetworkSelector: true,
+
+  // You can optionally set your partner fee. See https://docs.cow.fi/cow-protocol/tutorials/widget#partner-fee
   partnerFee: {
     bps: 50,
     recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
   },
+
+  // Optionally customize the images and sounds
   images: {
     emptyOrders: BASE_URL + '/images/pig.png',
   },
@@ -36,7 +41,8 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
     orderExecuted: BASE_URL + '/sounds/executed.mp3',
     postOrder: BASE_URL + '/sounds/posted.mp3',
   },
-  chainId: 1,
+
+  // Initial trade parameters
   sell: {
     asset: 'USDC',
     amount: '100000',
@@ -45,8 +51,10 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
     asset: 'COW',
     amount: '0',
   },
+
+  // Theming
   theme: {
-    // Configure ypur theme here: https://widget.cow.fi/
+    // Configure your theme here: https://widget.cow.fi, also see the docs https://docs.cow.fi/cow-protocol/tutorials/widget#custom-theme
     baseTheme: 'light',
     primary: '#fa24d7',
     paper: '#ffe5f6',
@@ -59,6 +67,7 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
     info: '#428dff',
     success: '#00D897',
   },
+
   enabledTradeTypes: [TradeType.SWAP, TradeType.LIMIT, TradeType.ADVANCED],
   tradeType: TradeType.SWAP,
 }
@@ -119,7 +128,7 @@ const SafeApp = (): React.ReactElement => {
         }
       />
 
-      <Box>
+      <Box sx={{ padding: '10px' }}>
         <CowSwapWidget params={params} provider={web3Provider} listeners={listeners} />
       </Box>
     </Paper>
