@@ -17,8 +17,6 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   width: '100%',
   height: '640px',
   standaloneMode: false, // Dapp mode, we handle the Ethereum provider
-  baseUrl: 'https://dev.swap.cow.fi',
-
   // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
 
   // You can disable the toast messages and confirmation modal (if you want to handle them yourself, see event handling in https://docs.cow.fi/cow-protocol/tutorials/widget#events-handling)
