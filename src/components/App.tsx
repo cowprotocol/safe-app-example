@@ -19,7 +19,7 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   baseUrl: 'http://localhost:3000',
 
   // Standalone or Dapp mode
-  standaloneMode: true, // Standalone mode will detect the Safe SDK provider automatically (this is why also we don't need to pass any provider to the widget)
+  standaloneMode: false, // We use Dapp mode, so the widget doesn't offer to connect / disconnect. We don't need to pass the provider to the widget either, because it detect the Safe SDK provider automatically
 
   // You can disable the toast messages and confirmation modal (if you want to handle them yourself, see event handling in https://docs.cow.fi/cow-protocol/tutorials/widget#events-handling)
   disableToastMessages: true,
