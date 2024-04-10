@@ -58,11 +58,6 @@ export function CowConfig(props: CowConfigProps) {
     updateParams(newParams)
   }
 
-  const handleChainChange = (event: SelectChangeEvent) => {
-    const chainId = Number(event.target.value)
-    updateParams({ ...params, chainId })
-  }
-
   const handleTradeTypeChange = (event: SelectChangeEvent) => {
     const newParams = { ...params }
     newParams.tradeType = event.target.value as TradeType
@@ -110,23 +105,6 @@ export function CowConfig(props: CowConfigProps) {
   return (
     <Paper>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4} lg={2}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Chain</InputLabel>
-            <Select
-              labelId="select-chain"
-              id="select-chain"
-              value={chainId}
-              label="Chain Id"
-              onChange={handleChainChange}
-            >
-              <MenuItem value={1}>Mainnet</MenuItem>
-              <MenuItem value={100}>Gnosis Chain</MenuItem>
-              <MenuItem value={11155111}>Sepolia</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-
         {/* Sell + Buy + Amount */}
         <Grid item xs={12} md={6}>
           <Grid container spacing={2}>
@@ -201,7 +179,7 @@ export function CowConfig(props: CowConfigProps) {
                   labelId="select-trade=type"
                   id="select-trade-type"
                   value={tradeType}
-                  label="Chain Id"
+                  label="Trade types"
                   onChange={handleTradeTypeChange}
                 >
                   <MenuItem value={TradeType.SWAP}>Swap</MenuItem>
