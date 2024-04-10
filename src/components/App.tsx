@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { CowConfig } from './CowConfig'
 import { CowSwapWidget, CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
-import { CowEvents, CowEventListeners } from '@cowprotocol/events'
+import { CowEvents, CowEventListeners, OnTradeParamsPayload } from '@cowprotocol/events'
 
 import { Paper, Chip, Snackbar, Box } from '@mui/material'
 
@@ -15,7 +15,8 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   width: '100%',
   height: '640px',
 
-  baseUrl: 'https://dev.swap.cow.fi',
+  // baseUrl: 'https://dev.swap.cow.fi',
+  baseUrl: 'http://localhost:3000',
 
   // Standalone or Dapp mode
   standaloneMode: true, // Standalone mode will detect the Safe SDK provider automatically (this is why also we don't need to pass any provider to the widget)
@@ -43,8 +44,8 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
 
   // Initial trade parameters
   sell: {
-    asset: 'USDC',
-    amount: '100000',
+    asset: 'WETH',
+    amount: '10',
   },
   buy: {
     asset: 'COW',
@@ -100,6 +101,8 @@ const SafeApp = (): React.ReactElement => {
     setParams(params)
   }, [])
 
+  const [tradeParams, setTradeParams] = useState<OnTradeParamsPayload | undefined>(undefined)
+
   const [toasts, setToasts] = useState<String[]>([])
   const toast = toasts.length > 0 ? toasts[0] : undefined
 
@@ -124,6 +127,13 @@ const SafeApp = (): React.ReactElement => {
           openToast(event.message)
         },
       },
+      {
+        event: CowEvents.ON_CHANGE_TRADE_PARAMS,
+        handler: (newTradeParams) => {
+          console.info('🔄 New trade parameters (tradeParams):', event)
+          setTradeParams(newTradeParams)
+        },
+      },
     ]
   }, [openToast])
 
@@ -131,7 +141,7 @@ const SafeApp = (): React.ReactElement => {
     <Paper elevation={0} sx={{ p: 2 }}>
       <h1>🐷 Your Safe App</h1>
 
-      <CowConfig params={params} updateParams={updateWidgetParams} />
+      <CowConfig params={params} updateParams={updateWidgetParams} tradeParams={tradeParams} />
 
       <Snackbar
         open={toasts.length > 0}

@@ -1163,24 +1163,24 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cowprotocol/events@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/events/-/events-1.1.0.tgz#b40321366fc65d1b4fb6851844cc87b93cbd4095"
-  integrity sha512-TFK09Cn2xAYkx7ISyi92O1515V+cZ2dDA73cRKVQqblxsd3vB3v85zzABqRu0S+IkIBr4N49xRYVjGrgKNoznw==
+"@cowprotocol/events@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/events/-/events-1.2.0.tgz#7bd2ac4d03a5b934cc0c29e5ab009a1216d414b1"
+  integrity sha512-oCT5eFYVAP8H1AwWCDN7LMd9iyd0zuMI7MmEtMDjt6vf3EReakaBZegG07jY9p4xMibwIb6ApfY0ylYT9WZwWg==
 
-"@cowprotocol/widget-lib@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.8.0.tgz#1f009d2f234c515429b380bc448055547a0d8bc6"
-  integrity sha512-oQfcFg6w3cjqb/1aKFo5Esd4lwMHnoHZG6lmMjf9xedgupOqh6PONMLLNO+TQtwfhs/BRr7tsEvgxC7aRtN25A==
+"@cowprotocol/widget-lib@^0.9.0-RC.0":
+  version "0.9.0-RC.0"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-lib/-/widget-lib-0.9.0-RC.0.tgz#a97d732ad269912e0b10f155cf0415ed1937b91b"
+  integrity sha512-AVGa/EMBIFW5qJ4MqSepwgqyKRoPYq20TjDnMge1zs1VWTJcpjPk9qO3JXL6W45r+QFjfY0YfkG9T0c0S6dljg==
   dependencies:
-    "@cowprotocol/events" "^1.1.0"
+    "@cowprotocol/events" "^1.2.0"
 
-"@cowprotocol/widget-react@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.6.0.tgz#593f1047b58a2f7267616f15e85ee60b6c7b8088"
-  integrity sha512-uyNUmJ/uMV2zNwW1hIaTUJ0EgF/HASVSXcPin1ptAv5kP1xCVlRof2L5smRazNK81WK3nxePv4hC9aQ/58tVNQ==
+"@cowprotocol/widget-react@0.7.0-RC.0":
+  version "0.7.0-RC.0"
+  resolved "https://registry.yarnpkg.com/@cowprotocol/widget-react/-/widget-react-0.7.0-RC.0.tgz#9bacda4d25ca6cf6eae29e4ca158f128fc5b2916"
+  integrity sha512-/DxBkSwDhSOIvY4j52YBsSACyuAtM56aI4WWUXA6KOBaasptc9FTiO4H4LK55zF/eLe3uby55HOhv4buXfDfTQ==
   dependencies:
-    "@cowprotocol/widget-lib" "^0.8.0"
+    "@cowprotocol/widget-lib" "^0.9.0-RC.0"
 
 "@csstools/normalize.css@*":
   version "12.1.1"

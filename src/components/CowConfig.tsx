@@ -12,16 +12,19 @@ import {
   Grid,
 } from '@mui/material'
 import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
+import { OnTradeParamsPayload } from '@cowprotocol/events'
+import { TradeDetails } from './TradeDetails'
 
-const TOKENS = ['USDC', 'COW', 'WETH', 'DAI']
+const TOKENS = ['USDC', 'COW', 'WETH']
 
 export interface CowConfigProps {
   params: CowSwapWidgetParams
+  tradeParams?: OnTradeParamsPayload
   updateParams: (config: CowSwapWidgetParams) => void
 }
 
 export function CowConfig(props: CowConfigProps) {
-  const { updateParams, params } = props
+  const { updateParams, params, tradeParams } = props
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -100,7 +103,9 @@ export function CowConfig(props: CowConfigProps) {
   const { sell, buy, partnerFee, enabledTradeTypes, chainId, tradeType } = params
   const [sellToken, sellAmount] = sell ? [sell.asset, sell.amount] : [undefined, undefined]
   const [buyToken, _buyAmount] = buy ? [buy.asset, buy.amount] : [undefined, undefined]
-  const { bps, recipient } = partnerFee || {}
+  const { bps } = partnerFee || {}
+
+  console.log('tradeParams', tradeParams)
 
   return (
     <Paper>
@@ -210,6 +215,8 @@ export function CowConfig(props: CowConfigProps) {
           </Grid>
         </Grid>
       </Grid>
+
+      <TradeDetails tradeParams={tradeParams} />
     </Paper>
   )
 }
