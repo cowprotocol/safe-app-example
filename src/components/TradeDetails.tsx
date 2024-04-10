@@ -60,11 +60,13 @@ function Currency({ currency, label }: { currency?: TokenInfo; label: string }) 
     return
   }
 
-  const { symbol, address, logoURI } = currency
+  const { symbol, address, logoURI, decimals } = currency
   return (
     <li>
       {logoURI && <img src={logoURI} />}
-      <strong>{label}</strong>: <Chip label={symbol} variant="outlined" /> &nbsp; (<code>{address}</code>)
+      <strong>{label}</strong>: <Chip label={symbol} variant="outlined" /> &nbsp; (address=<code>{address}</code>,
+      decimals=
+      <code>{decimals})</code>
     </li>
   )
 }
@@ -117,7 +119,7 @@ function Balance({ label, amount, fiatAmount }: { label: string; amount?: bigint
 
 export function DetailsTooltip() {
   return (
-    <Tooltip title="Use this info, to set your own fee based on the market">
+    <Tooltip title="You can use this info, to set your own fee based on the trade details">
       <IconButton size="small">
         <QuestionMark />
       </IconButton>
