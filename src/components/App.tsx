@@ -1,6 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { useSafeAppsSDK } from '@safe-global/safe-apps-react-sdk'
-import { SafeProvider } from '../SafeProvider'
 import { CowConfig } from './CowConfig'
 import { CowSwapWidget, CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
 import { CowEvents, CowEventListeners } from '@cowprotocol/events'
@@ -16,8 +14,11 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   appCode: APP_CODE,
   width: '100%',
   height: '640px',
-  standaloneMode: false, // Dapp mode, we handle the Ethereum provider
-  // tokenLists: ['https://tokens.coingecko.com/uniswap/all.json', 'https://files.cow.fi/tokens/CowSwap.json'],
+
+  baseUrl: 'https://dev.swap.cow.fi',
+
+  // Standalone or Dapp mode
+  standaloneMode: true, // Standalone mode will detect the Safe SDK provider automatically (this is why also we don't need to pass any provider to the widget)
 
   // You can disable the toast messages and confirmation modal (if you want to handle them yourself, see event handling in https://docs.cow.fi/cow-protocol/tutorials/widget#events-handling)
   disableToastMessages: true,
@@ -50,6 +51,27 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
     amount: '0',
   },
 
+  // Tokens
+  tokenLists: ['https://files.cow.fi/tokens/CoinGecko.json', 'https://files.cow.fi/tokens/CowSwap.json'], // Add your custom token list (see https://tokenlists.org)
+  customTokens: [
+    {
+      address: '0xf7823da15d0f2dc6e0d03e4925928d9ab7cbaf7f',
+      symbol: 'YOUR-COIN',
+      name: 'Your Coin',
+      chainId: 11155111,
+      decimals: 18,
+      logoURI: BASE_URL + '/images/your-coin.png',
+    },
+    {
+      address: '0xe92ab7237e6c7dd706aaaea52f72f90eac880894',
+      symbol: 'YOUR-COIN',
+      name: 'Your Coin',
+      chainId: 100,
+      decimals: 18,
+      logoURI: BASE_URL + '/images/your-coin.png',
+    },
+  ], // You can manually add some custom tokens or share the ones you have in your Dapp
+
   // Theming
   theme: {
     // Configure your theme here: https://widget.cow.fi, also see the docs https://docs.cow.fi/cow-protocol/tutorials/widget#custom-theme
@@ -71,8 +93,8 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
 }
 
 const SafeApp = (): React.ReactElement => {
-  const { sdk, safe } = useSafeAppsSDK()
-  const web3Provider = useMemo(() => new SafeProvider(safe, sdk), [sdk, safe])
+  // const { sdk, safe } = useSafeAppsSDK()
+  // const web3Provider = useMemo(() => new SafeProvider(safe, sdk), [sdk, safe])
   const [params, setParams] = useState<CowSwapWidgetParams>(DEFAULT_COW_PARAMS)
   const updateWidgetParams = useCallback((params: CowSwapWidgetParams) => {
     setParams(params)
@@ -127,7 +149,7 @@ const SafeApp = (): React.ReactElement => {
       />
 
       <Box sx={{ padding: '10px' }}>
-        <CowSwapWidget params={params} provider={web3Provider} listeners={listeners} />
+        <CowSwapWidget params={params} listeners={listeners} />
       </Box>
     </Paper>
   )
