@@ -15,8 +15,9 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   width: '100%',
   height: '640px',
 
-  // baseUrl: 'https://dev.swap.cow.fi',
-  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://swap.cow.fi', // Default
+  // baseUrl: 'https://dev.swap.cow.fi', // Dev environment
+  // baseUrl: 'http://localhost:3000', // Local environment
 
   // Standalone or Dapp mode
   standaloneMode: false, // We use Dapp mode, so the widget doesn't offer to connect / disconnect. We don't need to pass the provider to the widget either, because it detect the Safe SDK provider automatically
