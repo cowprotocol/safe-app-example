@@ -1,4 +1,4 @@
-import { OnTradeParamsPayload } from '@cowprotocol/events'
+import { OnTradeParamsPayload, AtomsAndUnits } from '@cowprotocol/events'
 import { TokenInfo } from '@cowprotocol/widget-lib'
 
 import QuestionMark from '@mui/icons-material/QuestionMark'
@@ -18,19 +18,19 @@ export function TradeDetails({ tradeParams }: TradeDetailsProps) {
   }
 
   const {
-    inputCurrency,
-    outputCurrency,
-    inputCurrencyAmount,
-    outputCurrencyAmount,
+    sellToken,
+    buyToken,
+    sellTokenAmount,
+    buyTokenAmount,
     orderType,
     orderKind,
-    inputCurrencyBalance,
-    inputCurrencyFiatAmount,
-    outputCurrencyBalance,
-    outputCurrencyFiatAmount,
+    sellTokenBalance,
+    sellTokenFiatAmount,
+    buyTokenBalance,
+    buyTokenFiatAmount,
     recipient,
-    slippageAdjustedSellAmount,
-  } = tradeParams // TODO: Types are not being inferred correctly, we should review it in the library
+    maximumSendSellAmount,
+  } = tradeParams
 
   return (
     <Box sx={{ my: 2 }}>
@@ -38,17 +38,17 @@ export function TradeDetails({ tradeParams }: TradeDetailsProps) {
         <strong>Trade details</strong> <DetailsTooltip />:
         <ul>
           <OrderType orderKind={orderKind} orderType={orderType} />
-          <Currency label="Sell" currency={inputCurrency} />
-          <Amount label="Sell amount" amount={inputCurrencyAmount} />
-          <Currency label="Buy" currency={outputCurrency} />
-          <Amount label="Buy amount" amount={outputCurrencyAmount} />
+          <Currency label="Sell" currency={sellToken} />
+          <Amount label="Sell amount" amount={sellTokenAmount} />
+          <Currency label="Buy" currency={buyToken} />
+          <Amount label="Buy amount" amount={buyTokenAmount} />
           <Recipient recipient={recipient} />
-          <Amount label="Sell amount (after slippage)" amount={slippageAdjustedSellAmount} />
+          <Amount label="Sell amount (after slippage)" amount={maximumSendSellAmount} />
         </ul>
         <strong>Balances</strong>:
         <ul>
-          <Balance label="Sell balance" amount={inputCurrencyBalance} fiatAmount={inputCurrencyFiatAmount} />
-          <Balance label="Buy balance" amount={outputCurrencyBalance} fiatAmount={outputCurrencyFiatAmount} />
+          <Balance label="Sell balance" amount={sellTokenBalance} fiatAmount={sellTokenFiatAmount} />
+          <Balance label="Buy balance" amount={buyTokenBalance} fiatAmount={buyTokenFiatAmount} />
         </ul>
       </Alert>
     </Box>
@@ -71,14 +71,14 @@ function Currency({ currency, label }: { currency?: TokenInfo; label: string }) 
   )
 }
 
-function Amount({ amount, label }: { amount?: bigint; label: string }) {
+function Amount({ amount, label }: { amount?: AtomsAndUnits; label: string }) {
   if (!amount) {
     return
   }
 
   return (
     <li>
-      <strong>{label}</strong> &nbsp; {amount.toString()}
+      <strong>{label}</strong> &nbsp; {amount.units} (<code>{amount.atoms.toString()}</code>)
     </li>
   )
 }
@@ -104,15 +104,14 @@ function Recipient({ recipient }: { recipient?: string }) {
   )
 }
 
-function Balance({ label, amount, fiatAmount }: { label: string; amount?: bigint; fiatAmount?: bigint }) {
+function Balance({ label, amount, fiatAmount }: { label: string; amount?: AtomsAndUnits; fiatAmount?: string }) {
   if (!amount) {
     return
   }
 
   return (
     <li>
-      <strong>{label}</strong>: {amount.toString()} &nbsp;{' '}
-      {fiatAmount ? <>${(Number(fiatAmount) * 1e-18).toFixed(2)}</> : ''}
+      <strong>{label}</strong>: {amount.units} &nbsp; {fiatAmount ? <>${Number(fiatAmount).toFixed(2)}</> : ''}
     </li>
   )
 }

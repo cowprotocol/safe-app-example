@@ -4,7 +4,7 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
-    "@cowprotocol/widget-react": "0.7.0-RC.0",
+    "@cowprotocol/widget-react": "0.7.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",

@@ -105,8 +105,6 @@ export function CowConfig(props: CowConfigProps) {
   const [buyToken, _buyAmount] = buy ? [buy.asset, buy.amount] : [undefined, undefined]
   const { bps } = partnerFee || {}
 
-  console.log('tradeParams', tradeParams)
-
   return (
     <Paper>
       <Grid container spacing={2}>
