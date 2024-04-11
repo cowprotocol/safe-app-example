@@ -30,6 +30,7 @@ export function TradeDetails({ tradeParams }: TradeDetailsProps) {
     buyTokenFiatAmount,
     recipient,
     maximumSendSellAmount,
+    minimumReceiveBuyAmount,
   } = tradeParams
 
   return (
@@ -43,12 +44,16 @@ export function TradeDetails({ tradeParams }: TradeDetailsProps) {
           <Currency label="Buy" currency={buyToken} />
           <Amount label="Buy amount" amount={buyTokenAmount} />
           <Recipient recipient={recipient} />
-          <Amount label="Sell amount (after slippage)" amount={maximumSendSellAmount} />
         </ul>
         <strong>Balances</strong>:
         <ul>
           <Balance label="Sell balance" amount={sellTokenBalance} fiatAmount={sellTokenFiatAmount} />
           <Balance label="Buy balance" amount={buyTokenBalance} fiatAmount={buyTokenFiatAmount} />
+        </ul>
+        <strong>Limit Order</strong> (include slippage tolerance and fees):
+        <ul>
+          <Amount label="Sell amount" amount={maximumSendSellAmount} />
+          <Amount label="Buy amount" amount={minimumReceiveBuyAmount} />
         </ul>
       </Alert>
     </Box>
