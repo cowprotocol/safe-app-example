@@ -4,13 +4,18 @@ import { TokenInfo } from '@cowprotocol/widget-lib'
 import QuestionMark from '@mui/icons-material/QuestionMark'
 import Check from '@mui/icons-material/Check'
 
-import { Alert, Chip, IconButton } from '@mui/material'
+import { Alert, Chip, IconButton, Typography } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import { Box } from '@mui/system'
 
 export interface TradeDetailsProps {
   tradeParams?: OnTradeParamsPayload
 }
+
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
 
 export function TradeDetails({ tradeParams }: TradeDetailsProps) {
   if (!tradeParams) {
@@ -40,15 +45,15 @@ export function TradeDetails({ tradeParams }: TradeDetailsProps) {
         <ul>
           <OrderType orderKind={orderKind} orderType={orderType} />
           <Currency label="Sell" currency={sellToken} />
-          <Amount label="Sell amount" amount={sellTokenAmount} />
+          <Amount label="Sell amount" amount={sellTokenAmount} fiatAmount={sellTokenFiatAmount} />
           <Currency label="Buy" currency={buyToken} />
-          <Amount label="Buy amount" amount={buyTokenAmount} />
+          <Amount label="Buy amount" amount={buyTokenAmount} fiatAmount={buyTokenFiatAmount} />
           <Recipient recipient={recipient} />
         </ul>
         <strong>Balances</strong>:
         <ul>
-          <Balance label="Sell balance" amount={sellTokenBalance} fiatAmount={sellTokenFiatAmount} />
-          <Balance label="Buy balance" amount={buyTokenBalance} fiatAmount={buyTokenFiatAmount} />
+          <Balance label="Sell balance" amount={sellTokenBalance} />
+          <Balance label="Buy balance" amount={buyTokenBalance} />
         </ul>
         <strong>Limit Order</strong> (include slippage tolerance and fees):
         <ul>
@@ -76,15 +81,29 @@ function Currency({ currency, label }: { currency?: TokenInfo; label: string }) 
   )
 }
 
-function Amount({ amount, label }: { amount?: AtomsAndUnits; label: string }) {
+function Amount({ amount, fiatAmount, label }: { amount?: AtomsAndUnits; fiatAmount?: string; label: string }) {
   if (!amount) {
     return
   }
 
   return (
     <li>
-      <strong>{label}</strong> &nbsp; {amount.units} (<code>{amount.atoms.toString()}</code>)
+      <strong>{label}</strong> &nbsp; {amount.units} <FiatAmount amount={fiatAmount} /> (
+      <code>{amount.atoms.toString()}</code>)
     </li>
+  )
+}
+
+function FiatAmount({ amount }: { amount?: string }) {
+  if (!amount) {
+    return
+  }
+
+  return (
+    // <Typography component="span" variant="body2" color="blue">
+    //   &nbsp;({formatter.format(Number(amount))})
+    // </Typography>
+    <Chip label={formatter.format(Number(amount))} color="success" size="small" variant="outlined" />
   )
 }
 
