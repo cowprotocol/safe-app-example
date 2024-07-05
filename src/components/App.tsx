@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { CowConfig } from './CowConfig'
-import { CowSwapWidget, CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
+import { CowSwapWidget } from '@cowprotocol/widget-react'
 import { CowEvents, CowEventListeners, OnTradeParamsPayload } from '@cowprotocol/events'
+import { type CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-lib'
 
 import { Paper, Chip, Snackbar, Box } from '@mui/material'
 

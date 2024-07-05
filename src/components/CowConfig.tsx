@@ -11,10 +11,9 @@ import {
   TextField,
   Grid,
 } from '@mui/material'
-import { CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
 import { OnTradeParamsPayload } from '@cowprotocol/events'
 import { TradeDetails } from './TradeDetails'
-
+import { type CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-lib'
 const TOKENS = ['USDC', 'COW', 'WETH']
 
 export interface CowConfigProps {

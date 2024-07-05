@@ -1,5 +1,5 @@
 import { SafeAppProvider } from '@safe-global/safe-apps-provider'
-import { EthereumProvider, JsonRpcRequest } from '@cowprotocol/widget-react'
+import { EthereumProvider, JsonRpcRequest } from '@cowprotocol/widget-lib'
 import SafeAppsSDK, { SafeInfo } from '@safe-global/safe-apps-sdk'
 import { ethers } from 'ethers'
 import { Web3Provider } from 'ethers/providers'
