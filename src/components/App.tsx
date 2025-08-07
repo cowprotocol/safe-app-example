@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { CowConfig } from './CowConfig'
 import { CowSwapWidget, CowSwapWidgetParams, TradeType } from '@cowprotocol/widget-react'
-import { CowEvents, CowEventListeners, OnTradeParamsPayload } from '@cowprotocol/events'
+import { CowWidgetEventListeners, CowWidgetEvents, OnTradeParamsPayload } from '@cowprotocol/events'
 
 import { Paper, Chip, Snackbar, Box } from '@mui/material'
 
@@ -28,15 +28,10 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   hideNetworkSelector: true,
 
   // You can optionally set your partner fee. See https://docs.cow.fi/cow-protocol/tutorials/widget#partner-fee
-  partnerFee: {
-    bps: 50,
-    recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5',
-  },
+  partnerFee: { bps: 50, recipient: '0x79063d9173C09887d536924E2F6eADbaBAc099f5' },
 
   // Optionally customize the images and sounds
-  images: {
-    emptyOrders: BASE_URL + '/images/pig.png',
-  },
+  images: { emptyOrders: BASE_URL + '/images/pig.png' },
   sounds: {
     orderError: BASE_URL + '/sounds/error.mp3',
     orderExecuted: BASE_URL + '/sounds/executed.mp3',
@@ -44,14 +39,8 @@ const DEFAULT_COW_PARAMS: CowSwapWidgetParams = {
   },
 
   // Initial trade parameters
-  sell: {
-    asset: 'WETH',
-    amount: '10',
-  },
-  buy: {
-    asset: 'COW',
-    amount: '0',
-  },
+  sell: { asset: 'WETH', amount: '10' },
+  buy: { asset: 'COW', amount: '0' },
 
   // Tokens
   tokenLists: ['https://files.cow.fi/tokens/CoinGecko.json', 'https://files.cow.fi/tokens/CowSwap.json'], // Add your custom token list (see https://tokenlists.org)
@@ -119,17 +108,17 @@ const SafeApp = (): React.ReactElement => {
     setToasts((t) => t.slice(1))
   }
 
-  const listeners = useMemo<CowEventListeners>(() => {
+  const listeners = useMemo<CowWidgetEventListeners>(() => {
     return [
       {
-        event: CowEvents.ON_TOAST_MESSAGE,
+        event: CowWidgetEvents.ON_TOAST_MESSAGE,
         handler: (event) => {
           console.info('🍞 New toast message:', event)
           openToast(event.message)
         },
       },
       {
-        event: CowEvents.ON_CHANGE_TRADE_PARAMS,
+        event: CowWidgetEvents.ON_CHANGE_TRADE_PARAMS,
         handler: (newTradeParams) => {
           console.info('🔄 New trade parameters (tradeParams):', event)
           setTradeParams(newTradeParams)
